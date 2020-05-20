@@ -27,7 +27,7 @@ app.post("/repositories", (request, response) => {
 
   repositories.push(repositorie);
 
-  return response.status(200).json(repositorie);
+  return response.json(repositorie);
 });
 
 app.put("/repositories/:id", (request, response) => {

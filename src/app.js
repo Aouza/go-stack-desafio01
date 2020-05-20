@@ -22,7 +22,7 @@ app.post("/repositories", (request, response) => {
     title,
     url,
     techs,
-    like: 0
+    likes: 0
   }
 
   repositories.push(repositorie);
@@ -46,7 +46,7 @@ app.put("/repositories/:id", (request, response) => {
     title,
     url,
     techs,
-    like: repositories[repositorieIndex].like,
+    likes: repositories[repositorieIndex].likes,
   }
 
   repositories[repositorieIndex] = repositorie;
@@ -74,21 +74,16 @@ app.post("/repositories/:id/like", (request, response) => {
 
   const { id } = request.params;
 
-  const repositorieIndex = repositories.findIndex(repositorie => repositorie.id === id);
-
   const repositoryExist = repositories.find(repository => 
     repository.id === id  
   );
 
-  if (repositorieIndex < 0) {
-    return response.status(400).json({ "error": "Id not found" })
-  }
 
   if (!repositoryExist) {
     return response.status(400).json({ error: 'Repository does not exists.' });
   }
 
-  repositoryExist.like += 1;
+  repositoryExist.likes += 1;
 
   return response.status(200).json(repositoryExist);
 });

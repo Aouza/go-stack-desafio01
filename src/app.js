@@ -75,13 +75,21 @@ app.post("/repositories/:id/like", (request, response) => {
 
   const repositorieIndex = repositories.findIndex(repositorie => repositorie.id === id);
 
+  const repositoryExist = repositories.find(repository => 
+    repository.id === id  
+  );
+
   if (repositorieIndex < 0) {
     return response.status(400).json({ "error": "Id not found" })
   }
 
-  repositories[repositorieIndex].like = repositories[repositorieIndex].like + 1;
+  if (!repositoryExist) {
+    return response.status(400).json({ error: 'Repository does not exists.' });
+  }
 
-  return response.status(200).json(repositories[repositorieIndex]);
+  repositoryExist.like += 1;
+
+  return response.status(200).json(repositoryExist);
 });
 
 module.exports = app;

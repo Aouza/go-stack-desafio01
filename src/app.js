@@ -27,7 +27,7 @@ app.post("/repositories", (request, response) => {
 
   repositories.push(repositorie);
 
-  return response.json(repositories);
+  return response.json(repositorie);
 });
 
 app.put("/repositories/:id", (request, response) => {
@@ -81,7 +81,7 @@ app.post("/repositories/:id/like", (request, response) => {
 
   repositories[repositorieIndex].like = repositories[repositorieIndex].like + 1;
 
-  return response.json(repositories[repositorieIndex]);
+  return response.status(200).json(repositories[repositorieIndex]);
 });
 
 module.exports = app;
